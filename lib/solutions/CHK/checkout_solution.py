@@ -30,6 +30,14 @@ def checkout(skus):
                 total_checkout = total_checkout + discount + num_price
             else:
                 total_checkout = total_checkout + discount
+                
+        elif sku == "A" and num >= 5:
+            discount = 200 * (num // 5)
+            if (num % 5) != 0:
+                num_price = price_for_sku[sku] * (num % 5)
+                total_checkout = total_checkout + discount + num_price
+            else:
+                total_checkout = total_checkout + discount
     
         elif sku == "B" and num >= 2:
             discount = 45 * (num // 2)

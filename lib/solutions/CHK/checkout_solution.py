@@ -23,18 +23,16 @@ def checkout(skus):
     for sku, num in sku_map.items():
         # discounts
         if sku == "A" and num % 3 == 0:
-            print(6 % 1)
-            total_checkout = (num % 3) * 130
-#        elif sku == "B" and num % 2 == 0:
-#            
-#            total_checkout = (num % 2) * 45
-#        else:
-        total_checkout = num * price_for_sku[sku]
+            total_checkout = (num // 3) * 130
+        elif sku == "B" and num % 2 == 0:
+            total_checkout = (num // 2) * 45
+        else:
+            total_checkout = num * price_for_sku[sku]
 
     return total_checkout
     
 
-checkout("AAA")
+print(checkout("BBBA"))
 # - {"method":"checkout","params":[""],"id":"CHK_R1_002"}, expected: 0, got: -1
 # - {"method":"checkout","params":["ABCa"],"id":"CHK_R1_009"}, expected: -1, got: 20
 # - {"method":"checkout","params":["AxA"],"id":"CHK_R1_010"}, expected: -1, got: 100

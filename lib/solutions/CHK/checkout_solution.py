@@ -20,16 +20,25 @@ def checkout(skus):
             return -1
             
     total_checkout = 0
+    discount = 0
     for sku, num in sku_map.items():
-        # discounts
-        if sku == "A" and num % 3 == 0:
-            total_checkout = (num // 3) * 130
-            continue
-            
-        if sku == "B" and num % 2 == 0:
-            total_checkout = (num // 2) * 45
-            continue
         
-        total_checkout = total_checkout + (num * price_for_sku[sku])
+        if sku == "A" and num >= 3:
+            discount = 130 * (num // 3)
+            if (num % 3) != 0:
+                num_price = price_for_sku[sku] * (num % 3)
+                total_checkout = total_checkout + discount + num_price
+            else:
+                total_checkout = total_checkout + discount
+    
+        elif sku == "B" and num >= 2:
+            discount = 45 * (num // 2)
+            if (num % 2) != 0:
+                num_price = price_for_sku[sku] * (num % 2)
+                total_checkout = total_checkout + discount + num_price
+            else:
+                total_checkout = total_checkout + discount
+        else:
+            total_checkout = total_checkout + price_for_sku[sku] * num
 
     return total_checkout

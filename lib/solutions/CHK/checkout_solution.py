@@ -2,43 +2,43 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-    def checkout(skus):
-        allowed_skus = "ABCD"
+def checkout(skus):
+    allowed_skus = "ABCD"
 
-        price_for_sku = {
-            "A": 50,
-            "B": 30,
-            "C": 20,
-            "D": 15,
-        }
+    price_for_sku = {
+        "A": 50,
+        "B": 30,
+        "C": 20,
+        "D": 15,
+    }
 
-        sku_map = {}
-        for x in skus:
-            if x in allowed_skus:
-                sku_map[x] = skus.count(x)
-            else:
-                return -1
-                
-        total_checkout = 0
-        discount = 0
-        for sku, num in sku_map.items():
+    sku_map = {}
+    for x in skus:
+        if x in allowed_skus:
+            sku_map[x] = skus.count(x)
+        else:
+            return -1
             
-            if sku == "A" and num >= 3:
-                discount = 130 * (num // 3)
-                if (num % 3) != 0:
-                    num_price = price_for_sku[sku] * (num % 3)
-                    total_checkout = total_checkout + discount + num_price
-                else:
-                    total_checkout = total_checkout + discount
+    total_checkout = 0
+    discount = 0
+    for sku, num in sku_map.items():
         
-            elif sku == "B" and num >= 2:
-                discount = 45 * (num // 2)
-                if (num % 2) != 0:
-                    num_price = price_for_sku[sku] * (num % 2)
-                    total_checkout = total_checkout + discount + num_price
-                else:
-                    total_checkout = total_checkout + discount
+        if sku == "A" and num >= 3:
+            discount = 130 * (num // 3)
+            if (num % 3) != 0:
+                num_price = price_for_sku[sku] * (num % 3)
+                total_checkout = total_checkout + discount + num_price
             else:
-                total_checkout = total_checkout + price_for_sku[sku] * num
+                total_checkout = total_checkout + discount
+    
+        elif sku == "B" and num >= 2:
+            discount = 45 * (num // 2)
+            if (num % 2) != 0:
+                num_price = price_for_sku[sku] * (num % 2)
+                total_checkout = total_checkout + discount + num_price
+            else:
+                total_checkout = total_checkout + discount
+        else:
+            total_checkout = total_checkout + price_for_sku[sku] * num
 
-        return total_checkout
+    return total_checkout

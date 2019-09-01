@@ -3,13 +3,14 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    allowed_skus = "ABCD"
+    allowed_skus = "ABCDE"
 
     price_for_sku = {
         "A": 50,
         "B": 30,
         "C": 20,
         "D": 15,
+        "E": 40,
     }
 
     sku_map = {}
@@ -23,7 +24,15 @@ def checkout(skus):
     discount = 0
     for sku, num in sku_map.items():
         
-        if sku == "A" and num >= 3:
+        if sku == "A" and num >= 5:
+            discount = 200 * (num // 5)
+            if (num % 5) != 0:
+                num_price = price_for_sku[sku] * (num % 5)
+                total_checkout = total_checkout + discount + num_price
+            else:
+                total_checkout = total_checkout + discount
+        
+        elif sku == "A" and num >= 3:
             discount = 130 * (num // 3)
             if (num % 3) != 0:
                 num_price = price_for_sku[sku] * (num % 3)
